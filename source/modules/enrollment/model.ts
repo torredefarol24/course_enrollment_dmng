@@ -1,5 +1,6 @@
 import { model, Schema } from "mongoose";
 import { ENTITIES } from "../../config/enums";
+import { IEnrollment } from "../../config/interface";
 
 const schemaOpts = {
 	studentName: {
@@ -17,7 +18,7 @@ const schemaOpts = {
 	},
 };
 
-const enrSchema = new Schema<any>(schemaOpts, { timestamps: true });
+const enrSchema = new Schema<IEnrollment>(schemaOpts, { timestamps: true });
 enrSchema.pre("save", function (next) {
 	this.updatedAt = new Date();
 	next();

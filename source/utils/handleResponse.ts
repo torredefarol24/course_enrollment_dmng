@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from "express";
-import { ERRORS } from "../config/enums";
+import { ERRORS, HTTP_CODES, HTTP_PHRASES } from "../config/enums";
 
 export function handleResponse(
 	context: any,
@@ -7,7 +7,7 @@ export function handleResponse(
 	response: Response,
 	next: NextFunction
 ) {
-	if ([200, 201].includes(context.code)) {
+	if ([HTTP_CODES.OK, HTTP_CODES.Created].includes(context.code)) {
 		return response.status(context.code).json({
 			message: context.message,
 			data: context.data,
@@ -15,40 +15,40 @@ export function handleResponse(
 	} else {
 		console.error(`${request.method} ${request.originalUrl} ${context.toString()}`);
 
-		let message: string = ERRORS.SOMETHING_WENT_WRONG;
-		let code = 500;
+		let message: string = HTTP_PHRASES.InternalServerError;
+		let code = HTTP_CODES.InternalServerError;
 		let errStr = context.toString();
 
-		if (errStr.includes(ERRORS.COURSE_NOT_FOUND)) {
-			message = ERRORS.COURSE_NOT_FOUND;
-			code = 404;
+		if (errStr.includes(ERRORS.CourseNotFound)) {
+			message = ERRORS.CourseNotFound;
+			code = HTTP_CODES.NotFound;
 		}
 
 		if (
 			errStr.includes("Cast to ObjectId failed") &&
 			(errStr.includes(`for model "Courses"`) || errStr.includes(`at path "courseId"`))
 		) {
-			message = ERRORS.COURSE_NOT_FOUND;
-			code = 404;
+			message = ERRORS.CourseNotFound;
+			code = HTTP_CODES.NotFound;
 		}
 
 		if (errStr.includes("ValidationError:")) {
 			if (errStr.includes("is required")) {
-				message = ERRORS.BAD_REQEUST;
-				code = 400;
+				message = ERRORS.MissingParams;
+				code = HTTP_CODES.BadRequest;
 			}
 
 			if (
 				errStr.includes("Cast to Number failed") &&
 				(errStr.includes("duration") || errStr.includes("price"))
 			) {
-				message = ERRORS.BAD_REQEUST;
-				code = 400;
+				message = ERRORS.InvalidDataType;
+				code = HTTP_CODES.BadRequest;
 			}
 
 			if (errStr.includes("Cast to date failed")) {
-				message = ERRORS.BAD_REQEUST;
-				code = 400;
+				message = ERRORS.InvalidDataType;
+				code = HTTP_CODES.BadRequest;
 			}
 		}
 

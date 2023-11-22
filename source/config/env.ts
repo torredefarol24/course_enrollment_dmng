@@ -1,11 +1,12 @@
+import { config } from "dotenv";
 import { join } from "path";
-require("dotenv").config({
+
+config({
 	path: join(__dirname + "../../../", ".env"),
 });
 
 export const APP_CONF = {
 	PORT: process.env.PORT,
-	TEST_PORT: 13131
 };
 
 export const DB_CONF = {

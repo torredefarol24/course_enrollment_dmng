@@ -1,15 +1,12 @@
-import { CourseEnrollmentApp } from "../main/app";
-import { ENTITIES } from "./enums";
+import { apiV1, ENTITIES } from "./enums";
 
-export const TEST_CONF = {
-	ENDPOINTS: {
-		COURSES: {
-			CREATE: `/api/v1/${ENTITIES.Courses}`,
-			GET: `/api/v1/${ENTITIES.Courses}`,
-			GET_BY_ID: (id: string) => `/api/v1/${ENTITIES.Courses}/${id}`,
-		},
-		ENROLLMENT: {
-			CREATE: `/api/v1/${ENTITIES.Enrollment}`,
-		},
+export const TEST_ENDPOINTS = {
+	COURSES: {
+		CREATE: `${apiV1}/${ENTITIES.Courses}`,
+		GET: `${apiV1}/${ENTITIES.Courses}`,
+		GET_BY_ID: (id: string) => `${apiV1}/${ENTITIES.Courses}/${id}`,
+	},
+	ENROLLMENT: {
+		CREATE: `${apiV1}/${ENTITIES.Enrollment}`,
 	},
 };

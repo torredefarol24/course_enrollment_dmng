@@ -2,7 +2,9 @@ import bodyParser from "body-parser";
 import cors from "cors";
 import express from "express";
 import { connect } from "mongoose";
+import { apiV1 } from "../config/enums";
 import { APP_CONF, DB_CONF } from "../config/env";
+import { IEntityRouter } from "../config/interface";
 import { CourseRouter } from "../modules/courses/routes";
 import { EnrRouter } from "../modules/enrollment/routes";
 import { handleResponse } from "../utils/handleResponse";
@@ -34,9 +36,9 @@ export class CourseEnrollmentApp {
 	}
 
 	private integrateRoutes(app: express.Application) {
-		const routes: any = [CourseRouter, EnrRouter];
-		routes.map((route: any) => {
-			app.use(`/api/v1/${route.entity}`, route.router);
+		const routes: IEntityRouter[] = [CourseRouter, EnrRouter];
+		routes.map((route: IEntityRouter) => {
+			app.use(`${apiV1}/${route.entity}`, route.router);
 		});
 		app.use(handleResponse);
 	}
