@@ -24,7 +24,6 @@
 	},
 	"scripts": {
 		"build": "node_modules/typescript/bin/tsc",
-		"postinstall": "npm run build && npm run test",
 		"start": "node build/server.js",
 		"create_env": "cp .env.example .env",
 		"start_dev": "nodemon build/server.js",

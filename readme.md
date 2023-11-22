@@ -50,6 +50,7 @@ $ yarn start
 - Request Validation for fields in CREATE_ENROLLMENT
 - Request Validation for data types in CREATE_ENROLLMENT
 - Checking for Valid Course in CREATE_ENROLLMENT
+- Filter GET_COURSES API by 'price', 'instructor', 'duration'
 
 ---
 
@@ -94,7 +95,10 @@ $ yarn start
 
 ## 2. GET COURSES
 
-- Endpoint http://localhost:{{ PORT }}/api/v1/courses
+- Endpoint http://localhost:{{ PORT }}/api/v1/courses (ALL)
+- Endpoint http://localhost:{{ PORT }}/api/v1/courses?price=500 (filter by price)
+- Endpoint http://localhost:5155/api/v1/courses?instructor=John&price=500 (filter by price & instructor)
+- Endpoint http://localhost:5155/api/v1/courses?duration=240 (filter by duration)
 - Req Method: GET
 - Success response:
 

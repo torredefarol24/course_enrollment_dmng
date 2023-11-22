@@ -1,0 +1,16 @@
+version: "3"
+services:
+  app:
+    container_name: <APP_CONTAINER_NAME>
+    restart: always
+    build: .
+    ports:
+      - "5155:5155"
+    links:
+      - mongo
+
+  mongo:
+    container_name: <MONGO_CONTAINER_NAME>
+    image: mongo
+    ports:
+      - "27017:27017"

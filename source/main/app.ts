@@ -14,7 +14,7 @@ export class CourseEnrollmentApp {
 
 	constructor() {
 		/**
-		 * Maintain the order of functions 
+		 * Maintain the order of functions
 		 * Inside contructor to bootstrap successfully
 		 */
 		this.api = express();
