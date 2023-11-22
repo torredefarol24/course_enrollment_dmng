@@ -39,6 +39,7 @@ export async function getAllCourses(request: any, response: Response, next: Next
 				filter: getFilter(request.query),
 			},
 		};
+		
 		next(context);
 	} catch (err: any) {
 		next(err);

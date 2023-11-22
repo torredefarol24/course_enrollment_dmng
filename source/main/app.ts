@@ -13,17 +13,15 @@ export class CourseEnrollmentApp {
 	public api: express.Application;
 
 	constructor() {
+		/**
+		 * Maintain the order of functions 
+		 * Inside contructor to bootstrap successfully
+		 */
 		this.api = express();
 		this.connectToDB();
 		this.integrateMiddleware(this.api);
 		this.integrateRoutes(this.api);
 		this.listen(this.api);
-	}
-
-	private integrateMiddleware(app: express.Application) {
-		app.use(cors());
-		app.use(bodyParser.json());
-		app.use(bodyParser.urlencoded({ extended: true }));
 	}
 
 	private listen(app: express.Application) {
@@ -33,6 +31,12 @@ export class CourseEnrollmentApp {
 		} catch (err: any) {
 			console.error(`Failed to start: ${err}`);
 		}
+	}
+
+	private integrateMiddleware(app: express.Application) {
+		app.use(cors());
+		app.use(bodyParser.json());
+		app.use(bodyParser.urlencoded({ extended: true }));
 	}
 
 	private integrateRoutes(app: express.Application) {
@@ -48,7 +52,7 @@ export class CourseEnrollmentApp {
 			await connect(DB_CONF.CONN_URL);
 			console.log("Database Connection established");
 		} catch (err: any) {
-			console.log("Database Connection failed", err);
+			console.error("Database Connection failed", err);
 		}
 	}
 }

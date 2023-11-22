@@ -1,15 +1,16 @@
 import chai from "chai";
 import chaiHttp from "chai-http";
 import { describe } from "mocha";
-import { HTTP_CODES } from "../../config/enums";
-import { TEST_ENDPOINTS } from "../../config/testVals";
+import { ENTITIES, HTTP_CODES } from "../../config/enums";
 import { testApp } from "../../main/tester";
+import { getEndpoints } from "../endpoints";
 
 chai.use(chaiHttp);
+const route = getEndpoints(ENTITIES.Courses).GetAll;
 
-describe("Courses API :: Get Courses", () => {
-	it("should fetch courses", async () => {
-		const response = await chai.request(testApp).get(TEST_ENDPOINTS.COURSES.GET);
+describe("Courses API :: Get All Courses", () => {
+	it("should get all courses", async () => {
+		const response = await chai.request(testApp).get(route);
 		chai.expect(response.status).to.eql(HTTP_CODES.OK);
 	});
 });

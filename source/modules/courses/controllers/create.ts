@@ -15,6 +15,7 @@ export async function createCourse(request: any, response: Response, next: NextF
 				course: createdCourse,
 			},
 		};
+
 		next(context);
 	} catch (err: any) {
 		next(err);
